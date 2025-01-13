@@ -22,7 +22,7 @@ public class MainFrame extends JFrame {
         add(new LoginPanel(this));
         
         pack();
-        setLocationRelativeTo(null); // Căn giữa màn hình
+        setLocationRelativeTo(null); // Căn giữa màn
     }
 
     // Phương thức để set font mặc định cho toàn bộ ứng dụng

@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.Arrays;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -68,10 +69,13 @@ public class EditProjectMemberDialog extends JDialog {
         gbc.gridy++;
         formPanel.add(new JLabel("Vai trò:"), gbc);
         gbc.gridx = 1;
-        roleComboBox = new JComboBox<>(new ProjectRole[] {
-            ProjectRole.MANAGER,
-            ProjectRole.MEMBER
-        });
+
+        // Lọc các role cần hiển thị
+        ProjectRole[] availableRoles = Arrays.stream(ProjectRole.values())
+            .filter(role -> role == ProjectRole.OWNER || role == ProjectRole.MEMBER)
+            .toArray(ProjectRole[]::new);
+        roleComboBox = new JComboBox<>(availableRoles);
+
         formPanel.add(roleComboBox, gbc);
 
         add(formPanel, BorderLayout.CENTER);

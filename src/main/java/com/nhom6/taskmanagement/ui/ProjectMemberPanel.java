@@ -21,6 +21,7 @@ import com.nhom6.taskmanagement.model.Project;
 import com.nhom6.taskmanagement.model.ProjectMember;
 import com.nhom6.taskmanagement.model.ProjectRole;
 import com.nhom6.taskmanagement.model.User;
+import com.nhom6.taskmanagement.model.UserRole;
 import com.nhom6.taskmanagement.service.ProjectMemberService;
 import com.nhom6.taskmanagement.service.UserService;
 import com.nhom6.taskmanagement.ui.dialog.AddProjectMemberDialog;
@@ -53,10 +54,13 @@ public class ProjectMemberPanel extends JPanel {
         titleLabel.setFont(new Font("Arial", Font.BOLD, 16));
         headerPanel.add(titleLabel, BorderLayout.WEST);
 
-        // Add member button
-        JButton addButton = new JButton("Thêm thành viên");
-        addButton.addActionListener(e -> showAddMemberDialog());
-        headerPanel.add(addButton, BorderLayout.EAST);
+        // Add member button - chỉ hiện khi là ADMIN
+        User currentUser = UserService.getCurrentUser();
+        if (currentUser.getRole() == UserRole.ADMIN) {
+            JButton addButton = new JButton("Thêm thành viên");
+            addButton.addActionListener(e -> showAddMemberDialog());
+            headerPanel.add(addButton, BorderLayout.EAST);
+        }
 
         add(headerPanel, BorderLayout.NORTH);
 

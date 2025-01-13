@@ -18,7 +18,7 @@ public class UserService {
         this.userDAO = new UserDAO();
     }
 
-    // Thêm phương thức xử lý đăng nhập
+    // phương thức xử lý đăng nhập
     public boolean login(String username, String password) {
         if (userDAO.authenticate(username, password)) {
             currentUser = userDAO.findByUsername(username);
@@ -42,7 +42,7 @@ public class UserService {
         return userDAO.authenticate(username, password);
     }
 
-    // Các phương thức khác giữ nguyên
+    // Các phương thức
     public List<User> getAllUsers() {
         return userDAO.findAll();
     }
@@ -75,7 +75,7 @@ public class UserService {
     public boolean deleteUser(Long userId) {
         try {
             Connection conn = DatabaseConfig.getConnection();
-            // Thực hiện xóa thật sự từ database thay vì chỉ đánh dấu is_deleted
+            
             String sql = "DELETE FROM users WHERE id = ?";
             
             PreparedStatement stmt = conn.prepareStatement(sql);

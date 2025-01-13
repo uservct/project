@@ -110,19 +110,19 @@ public class UserDAO {
         }
     }
     
-    public void delete(Long id) {
-        String sql = "UPDATE users SET is_deleted = true, deleted_at = ? WHERE id = ?";
+    // public void delete(Long id) {
+    //     String sql = "UPDATE users SET is_deleted = true, deleted_at = ? WHERE id = ?";
         
-        try (Connection conn = DatabaseConfig.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+    //     try (Connection conn = DatabaseConfig.getConnection();
+    //          PreparedStatement stmt = conn.prepareStatement(sql)) {
             
-            stmt.setTimestamp(1, Timestamp.valueOf(java.time.LocalDateTime.now()));
-            stmt.setLong(2, id);
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+    //         stmt.setTimestamp(1, Timestamp.valueOf(java.time.LocalDateTime.now()));
+    //         stmt.setLong(2, id);
+    //         stmt.executeUpdate();
+    //     } catch (SQLException e) {
+    //         e.printStackTrace();
+    //     }
+    // }
 
     public User findByUsername(String username) {
         String sql = "SELECT * FROM users WHERE username = ? AND is_deleted = false";
@@ -174,7 +174,7 @@ public class UserDAO {
             return false;
         }
     }
-
+    //chuyển đổi dữ liệu 1 dòng ResultSet sang 1 User
     private User mapResultSetToUser(ResultSet rs) throws SQLException {
         User user = new User();
         user.setId(rs.getLong("id"));
